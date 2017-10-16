@@ -1,0 +1,43 @@
+<html>
+  <head>
+  <script src="socket.io.js"></script>
+  <script src="jquery-3.1.0.min.js"></script>
+  <script>
+    const socket = io.connect('http://localhost:3000');
+    socket.on('news', function (data) {
+      $('.art').text(data.data.GoodsID);
+      for (var key in data.data) {
+        if (key !== 'GoodsID') {
+          $('.' + key).hide().text(data.data[key]).fadeIn("slow");
+        }
+      };
+    });
+
+  </script>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>Артикул</td>
+          <td>Магазин 1</td>
+          <td>Магазин 2</td>
+          <td>Магазин 3</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="art"></td>
+          <td><span class="Price1"></span></td>
+          <td><span class="Price2"></span></td>
+          <td><span class="Price3"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
